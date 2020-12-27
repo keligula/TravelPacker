@@ -1,0 +1,12 @@
+@model TravelPacker.Models.TravelItem
+
+<form asp-action="Edit">
+    <fieldset class="item-form">
+        @Html.HiddenFor(m => m.CreatedDate)
+        @Html.HiddenFor(m=>m.UserId)
+        @Html.HiddenFor(m=>m.UserName)
+        @Html.LabelFor(m => m.ItemTitle)
+        @Html.TextAreaFor(m => m.ItemTitle)
+        <input type="submit" name="Update" />
+    </fieldset>
+</form>

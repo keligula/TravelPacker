@@ -1,0 +1,5 @@
+node_modules
+appsettings.Development.json
+appsettings.json
+launch.json
+launchSettings.json

@@ -1,0 +1,9 @@
+@model TravelPacker.Models.TravelItem
+
+<form asp-action="Create">
+    <fieldset class="item-form">
+        <h2>Submit an Idea</h2>
+        @Html.TextAreaFor(m=>m.ItemTitle)
+        <input type="submit" name="Create" />
+    </fieldset>
+</form>
