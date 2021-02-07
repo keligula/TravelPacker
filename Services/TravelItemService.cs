@@ -32,5 +32,10 @@ namespace TravelPacker.Services
 
         public void Delete(string id) =>
             _items.DeleteOne(i => i.Id == id);
+
+        public IList<TravelItem> GetItemsByListTypeId(string listTypeId)
+        {
+            return _items.Find(i => i.ListTypeId == listTypeId).ToList();
+        }
     }
 }

@@ -15628,6 +15628,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "/Users/kellysmith/Documents/Github/TravelPacker/Views/TravelItem/_ItemList.cshtml",
+      "TargetPath": "Views\\TravelItem\\_ItemList.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "/Users/kellysmith/Documents/Github/TravelPacker/Views/Home/Privacy.cshtml",
       "TargetPath": "Views\\Home\\Privacy.cshtml",
       "FileKind": "mvc"

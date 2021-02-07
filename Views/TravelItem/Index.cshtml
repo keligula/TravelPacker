@@ -1,23 +1,46 @@
-@model IEnumerable<TravelPacker.Models.TravelItem>
+@model TravelPacker.Models.CreateItemsViewModel
 
-<h1>List of Ideas</h1>
+<h2>Trip Types</h2>
+<div class="form-group">
+    <label class="control-label">Choose a trip to view items:</label>
+    <select class="form-control" asp-for="ListTypeId" asp-items="@Model.SelectListType">
+        <option value="@Model.ListTypeId">-- Select a List --</option>
+    </select>
+</div>
 
-@foreach (var item in Model)
-{
-    <div class="item">
-                        <span>Created By: @item.UserName on @item.CreatedDate.ToLocalTime()</span>
-    @* <span>Last Updated: @sub.LastUpdated.ToLocalTime()</span> *@
-    <div>
-                            @item.ItemTitle
-                            @item.ListTypeId
-    </div>
-                    @* @if (User.Identity.IsAuthenticated && User.Claims.FirstOrDefault(c => c.Type ==
-                                    System.Security.Claims.ClaimTypes.NameIdentifier).Value == @item.UserId)
-                                    { *@
-                    <a asp-action="Edit" asp-route-id="@item.Id">edit</a>
-                    <a asp-action="Delete" asp-route-id="@item.Id">delete</a>
-                    @* } *@
-    </div>
+<div id=itemListDiv hidden="true">
+    @Html.PartialAsync("_ItemList", @Model.TravelItem)
+</div>
+
+@section scripts {
+<script>
+    $(function () {
+        $('#ListTypeId').on('change', function(event) {
+            console.log('HALLO BABY!!!');
+            event.preventDefault();
+            event.stopPropagation();
+
+            var listTypeId = $('#ListTypeId').val();
+
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("_ItemList", "TravelItem")',
+                data: { listTypeId: listTypeId },
+                dataType: "html",
+                success: function (data) {
+                    console.log("Success!");
+                    $('#itemListDiv').html(data);
+                    $('#itemListDiv').show();
+                },
+                error: function () {
+                    alert("Error while populating ItemList.");
+                }
+            });
+            return false;
+        });
+    }) 
+
+</script>
+
 }
-<hr />
-<a class="create" asp-action="Create">Add New Idea</a>
+

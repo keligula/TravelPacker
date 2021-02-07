@@ -23,7 +23,17 @@ namespace TravelPacker.Controllers
         }
 
         [AllowAnonymous]
-        public ActionResult<IList<TravelItem>> Index() => View(_itemSvc.Read());
+        public ActionResult<IList<CreateItemsViewModel>> Index()
+        {
+            CreateItemsViewModel model = new CreateItemsViewModel();
+            model.SelectListType = _listSvc.Read().Select(x => new SelectListItem
+            {
+                Value = x.Id,
+                Text = x.Title
+            });
+
+            return View(model);
+        }
 
         [HttpGet]
         public ActionResult Create()
@@ -44,6 +54,7 @@ namespace TravelPacker.Controllers
         {
             TravelItem item = new TravelItem();
             item.CreatedDate = DateTime.Now;
+            item.UpdatedDate = DateTime.Now;
             item.UserId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value;
             item.UserName = User.Identity.Name;
             item.ListTypeId = vm.ListTypeId;
@@ -80,6 +91,7 @@ namespace TravelPacker.Controllers
         public ActionResult Edit(CreateItemsViewModel vm)
         {
             TravelItem item = new TravelItem();
+            item.UpdatedDate = DateTime.Now;
             item.ListTypeId = vm.ListTypeId;
             item.ItemTitle = vm.ItemTitle;
             item.UserId = vm.UserId;
@@ -102,6 +114,13 @@ namespace TravelPacker.Controllers
         {
             _itemSvc.Delete(id);
             return RedirectToAction("Index");
+        }
+
+        [AllowAnonymous]
+        public ActionResult<IList<TravelItem>> _ItemList(string listTypeId)
+        {
+            List<TravelItem> model = _itemSvc.GetItemsByListTypeId(listTypeId).ToList();
+            return PartialView("_ItemList", model);
         }
 
     }

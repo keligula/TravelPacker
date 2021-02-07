@@ -66,3 +66,4 @@
 /Users/kellysmith/Documents/Github/TravelPacker/obj/Debug/netcoreapp5.0/Razor/Views/ListType/Create.cshtml.g.cs
 /Users/kellysmith/Documents/Github/TravelPacker/obj/Debug/netcoreapp5.0/Razor/Views/ListType/Index.cshtml.g.cs
 /Users/kellysmith/Documents/Github/TravelPacker/obj/Debug/netcoreapp5.0/Razor/Views/ListType/Edit.cshtml.g.cs
+/Users/kellysmith/Documents/Github/TravelPacker/obj/Debug/netcoreapp5.0/Razor/Views/TravelItem/_ItemList.cshtml.g.cs
