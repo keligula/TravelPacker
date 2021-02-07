@@ -63,3 +63,6 @@
 /Users/kellysmith/Documents/Github/TravelPacker/bin/Debug/netcoreapp5.0/Microsoft.IdentityModel.JsonWebTokens.dll
 /Users/kellysmith/Documents/Github/TravelPacker/bin/Debug/netcoreapp5.0/MongoDB.Libmongocrypt.dll
 /Users/kellysmith/Documents/Github/TravelPacker/bin/Debug/netcoreapp5.0/SharpCompress.dll
+/Users/kellysmith/Documents/Github/TravelPacker/obj/Debug/netcoreapp5.0/Razor/Views/ListType/Create.cshtml.g.cs
+/Users/kellysmith/Documents/Github/TravelPacker/obj/Debug/netcoreapp5.0/Razor/Views/ListType/Index.cshtml.g.cs
+/Users/kellysmith/Documents/Github/TravelPacker/obj/Debug/netcoreapp5.0/Razor/Views/ListType/Edit.cshtml.g.cs

@@ -2,20 +2,21 @@
 
 <h1>List of Ideas</h1>
 
-@foreach (var sub in Model)
+@foreach (var item in Model)
 {
     <div class="item">
-    <span>Created By: @sub.UserName on @sub.CreatedDate.ToLocalTime()</span>
+                        <span>Created By: @item.UserName on @item.CreatedDate.ToLocalTime()</span>
     @* <span>Last Updated: @sub.LastUpdated.ToLocalTime()</span> *@
     <div>
-        @sub.ItemTitle
+                            @item.ItemTitle
+                            @item.ListTypeId
     </div>
-    @if (User.Identity.IsAuthenticated && User.Claims.FirstOrDefault(c => c.Type ==
-    System.Security.Claims.ClaimTypes.NameIdentifier).Value == @sub.UserId)
-        {
-            <a asp-action="Edit" asp-route-id="@sub.Id">edit</a>
-            <a asp-action="Delete" asp-route-id="@sub.Id">delete</a>
-        }
+                    @* @if (User.Identity.IsAuthenticated && User.Claims.FirstOrDefault(c => c.Type ==
+                                    System.Security.Claims.ClaimTypes.NameIdentifier).Value == @item.UserId)
+                                    { *@
+                    <a asp-action="Edit" asp-route-id="@item.Id">edit</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id">delete</a>
+                    @* } *@
     </div>
 }
 <hr />

@@ -20,6 +20,8 @@ using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using Microsoft.IdentityModel.Tokens;
 using Okta.AspNetCore;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Logging;
+using System.Net.Http;
 
 namespace TravelPacker
 {
@@ -33,6 +35,8 @@ namespace TravelPacker
 
         public void ConfigureServices(IServiceCollection services)
         {
+            IdentityModelEventSource.ShowPII = true;
+
             services.Configure<DatabaseSettings>(Configuration.GetSection(nameof(DatabaseSettings)));
             services.AddSingleton<IDatabaseSettings>(x => x.GetRequiredService<IOptions<DatabaseSettings>>().Value);
 
@@ -52,10 +56,11 @@ namespace TravelPacker
             {
                 options.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
                 //options.Authority = "https://localhost:5001";
-                options.Authority = Configuration["Okta:Domain"] + "/oath2/default";
+                options.Authority = Configuration["Okta:Domain"];
                 options.RequireHttpsMetadata = true;
                 options.ClientId = Configuration["Okta:ClientId"];
                 options.ClientSecret = Configuration["Okta:ClientSecret"];
+                //options.SignedOutCallbackPath = Configuration["Okta:PostLogoutRedirectUri"];
                 options.ResponseType = OpenIdConnectResponseType.Code;
                 options.GetClaimsFromUserInfoEndpoint = true;
                 options.Scope.Add("openid");
@@ -73,8 +78,8 @@ namespace TravelPacker
 
             services.AddMvc(option => option.EnableEndpointRouting = false).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
-            services.AddSingleton<SubmissionService>();
             services.AddSingleton<TravelItemService>();
+            services.AddSingleton<ListTypeService>();
         }
 
         public void Configure(IApplicationBuilder app, IHostEnvironment env)
@@ -92,6 +97,7 @@ namespace TravelPacker
             app.UseCookiePolicy();
             app.UseAuthentication();
             app.UseAuthorization();
+            app.UseFileServer();
 
             app.UseMvc(routes => {
                 routes.MapRoute(

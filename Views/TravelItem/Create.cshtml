@@ -1,9 +1,15 @@
-@model TravelPacker.Models.TravelItem
+@model TravelPacker.Models.CreateItemsViewModel
 
 <form asp-action="Create">
-    <fieldset class="item-form">
+    <fieldset class="form-group">
         <h2>Submit an Idea</h2>
-        @Html.TextAreaFor(m=>m.ItemTitle)
+            <div class="form-group">
+                <label class="control-label">Choose a List to attach your item to:</label>
+                <select class="form-control" asp-for="ListTypeId" asp-items="@Model.SelectListType">
+                <option value="@Model.ListTypeId">-- Select a List --</option>
+                </select>
+            </div>
+        @Html.TextAreaFor(m => m.ItemTitle)
         <input type="submit" name="Create" />
     </fieldset>
 </form>

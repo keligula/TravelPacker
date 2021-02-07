@@ -4,8 +4,7 @@ using System.Linq;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-//using Microsoft.AspNetCore.Mvc.ViewFeatures.Internal;
-//using Microsoft.AspNetCore.Razor.Language;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using TravelPacker.Models;
 using TravelPacker.Services;
 
@@ -15,25 +14,41 @@ namespace TravelPacker.Controllers
     public class TravelItemController : Controller
     {
         private readonly TravelItemService _itemSvc;
+        private readonly ListTypeService _listSvc;
 
-        public TravelItemController(TravelItemService itemService)
+        public TravelItemController(TravelItemService itemService, ListTypeService listService)
         {
             _itemSvc = itemService;
+            _listSvc = listService;
         }
 
         [AllowAnonymous]
         public ActionResult<IList<TravelItem>> Index() => View(_itemSvc.Read());
 
         [HttpGet]
-        public ActionResult Create() => View();
+        public ActionResult Create()
+        {
+            CreateItemsViewModel model = new CreateItemsViewModel();
+            model.SelectListType = _listSvc.Read().Select(x => new SelectListItem
+            {
+                Value = x.Id,
+                Text = x.Title
+            });
+
+            return View(model);
+        }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult<TravelItem> Create(TravelItem item)
+        public ActionResult<TravelItem> Create(CreateItemsViewModel vm)
         {
+            TravelItem item = new TravelItem();
             item.CreatedDate = DateTime.Now;
             item.UserId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value;
             item.UserName = User.Identity.Name;
+            item.ListTypeId = vm.ListTypeId;
+            item.ItemTitle = vm.ItemTitle;
+
             if (ModelState.IsValid)
             {
                 _itemSvc.Create(item);
@@ -42,18 +57,37 @@ namespace TravelPacker.Controllers
         }
 
         [HttpGet]
-        public ActionResult<Submission> Edit(string id) =>
-            View(_itemSvc.Find(id));
+        public ActionResult<CreateItemsViewModel> Edit(string id)
+        {
+            CreateItemsViewModel model = new CreateItemsViewModel();
+            var item = _itemSvc.Find(id);
+            model.ItemTitle = item.ItemTitle;
+            model.UserId = item.UserId;
+            model.UserName = item.UserName;
+            model.Id = item.Id;
+            model.SelectListType = _listSvc.Read().Select(x => new SelectListItem
+            {
+                Value = x.Id,
+                Text = x.Title,
+                Selected = (x.Id == item.ListTypeId)
+            });
+
+            return View(model);
+        }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(TravelItem item)
+        public ActionResult Edit(CreateItemsViewModel vm)
         {
-            //item.LastUpdated = DateTime.Now;
-            //item.Created = item.Created.ToLocalTime();
+            TravelItem item = new TravelItem();
+            item.ListTypeId = vm.ListTypeId;
+            item.ItemTitle = vm.ItemTitle;
+            item.UserId = vm.UserId;
+            item.UserName = vm.UserName;
+            item.Id = vm.Id;
             if (ModelState.IsValid)
             {
-                if (User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value != item.Id)
+                if (User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value != item.UserId)
                 {
                     return Unauthorized();
                 }
@@ -69,5 +103,6 @@ namespace TravelPacker.Controllers
             _itemSvc.Delete(id);
             return RedirectToAction("Index");
         }
+
     }
 }

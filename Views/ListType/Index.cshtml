@@ -1,0 +1,19 @@
+@model IEnumerable<TravelPacker.Models.ListType>
+
+<h1>List Types</h1>
+
+<ul class="list-group">
+    @foreach (var type in Model)
+    {
+        <div class="item">
+            <li class="list-group-item" href="#">@type.Title
+                <div class="list-right">
+                    <a asp-action="Edit" asp-route-id="@type.Id">edit</a>
+                    <a asp-action="Delete" asp-route-id="@type.Id">delete</a>
+                </div>
+            </li>
+        </div>
+    }
+</ul>
+
+<a class="create" asp-action="Create">Add New List Type</a>

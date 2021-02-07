@@ -1,0 +1,9 @@
+@model TravelPacker.Models.ListType
+
+<form asp-action="Create">
+    <fieldset class="item-form">
+        <h2>Create a List Type</h2>
+        @Html.TextAreaFor(m => m.Title)
+        <input type="submit" name="Create" />
+    </fieldset>
+</form> 

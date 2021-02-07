@@ -1,3 +1,5 @@
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Mvc;
@@ -24,5 +26,18 @@ namespace TravelPacker.Controllers
                 CookieAuthenticationDefaults.AuthenticationScheme
             });
         }
+
+        // [HttpPost]
+        // public IActionResult Logout()
+        // {
+        //     return new SignOutResult(
+        //         new[]
+        //         {
+        //                 OpenIdConnectDefaults.AuthenticationScheme,
+        //                 CookieAuthenticationDefaults.AuthenticationScheme,
+        //     },
+        //         new AuthenticationProperties { RedirectUri = "/Home/Index" });
+        // }
+
     }
 }

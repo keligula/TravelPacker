@@ -15608,13 +15608,8 @@
       "FileKind": "mvc"
     },
     {
-      "FilePath": "/Users/kellysmith/Documents/Github/TravelPacker/Views/HelloWorld/Welcome.cshtml",
-      "TargetPath": "Views\\HelloWorld\\Welcome.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "/Users/kellysmith/Documents/Github/TravelPacker/Views/HelloWorld/Index.cshtml",
-      "TargetPath": "Views\\HelloWorld\\Index.cshtml",
+      "FilePath": "/Users/kellysmith/Documents/Github/TravelPacker/Views/ListType/Edit.cshtml",
+      "TargetPath": "Views\\ListType\\Edit.cshtml",
       "FileKind": "mvc"
     },
     {
@@ -15680,6 +15675,16 @@
     {
       "FilePath": "/Users/kellysmith/Documents/Github/TravelPacker/Views/Shared/Error.cshtml",
       "TargetPath": "Views\\Shared\\Error.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "/Users/kellysmith/Documents/Github/TravelPacker/Views/ListType/Create.cshtml",
+      "TargetPath": "Views\\ListType\\Create.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "/Users/kellysmith/Documents/Github/TravelPacker/Views/ListType/Index.cshtml",
+      "TargetPath": "Views\\ListType\\Index.cshtml",
       "FileKind": "mvc"
     }
   ],
