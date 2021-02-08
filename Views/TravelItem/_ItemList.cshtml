@@ -1,22 +1,30 @@
 @model IEnumerable<TravelPacker.Models.TravelItem>
 
-@foreach (var item in Model)
-{
-    <div class="item">
-    <span>Created By: @item.UserName on @item.CreatedDate.ToLocalTime()</span>
-    @* <span>Last Updated: @sub.LastUpdated.ToLocalTime()</span> *@
-    <div>
-        @item.ItemTitle
-        @item.ListTypeId
-        @item.UpdatedDate
-    </div>
-    @* @if (User.Identity.IsAuthenticated && User.Claims.FirstOrDefault(c => c.Type ==
-        System.Security.Claims.ClaimTypes.NameIdentifier).Value == @item.UserId)
-        { *@
-    <a asp-action="Edit" asp-route-id="@item.Id">edit</a>
-    <a asp-action="Delete" asp-route-id="@item.Id">delete</a>
-    @* } *@
+<div>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Item Title</th>
+                <th scope="col">ListTypeId</th>
+                <th scope="col">Date Last Updated</th>
+                <th scope="col">Created By</th>
+                <th scope="col">Edit</th>
+                <th scope="col">Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                    <tr>
+                        <td>@item.ItemTitle</td>
+                        <td>@item.ListTypeId</td>
+                        <td>@item.UpdatedDate</td>
+                        <td>@item.UserName</td>
+                        <td><a asp-action="Edit" asp-route-id="@item.Id">Edit</a></td>
+                        <td><a asp-action="Delete" asp-route-id="@item.Id">Delete</a></td>
+                    </tr>
+            }
+        </tbody>
+    </table>
 </div>
-}
-<hr />
-<a class="create" asp-action="Create">Add New Idea</a>
+

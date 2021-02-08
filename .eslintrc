@@ -4,7 +4,9 @@
         "commonjs": true,
         "es6": true
     },
-    "extends": "prettier",
+    "extends": [
+        "prettier"
+    ],
     "parser": "babel-eslint",
     "parserOptions": {
         "ecmaVersion": 8,
@@ -13,7 +15,9 @@
         },
         "sourceType": "module"
     },
-    "plugins": ["prettier"],
+    "plugins": [
+        "prettier"
+    ],
     "rules": {
         "prettier/prettier": [
             "error",

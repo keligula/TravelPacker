@@ -1,6 +1,6 @@
 @model TravelPacker.Models.CreateItemsViewModel
 
-<h2>Trip Types</h2>
+<h2>Packing Lists</h2>
 <div class="form-group">
     <label class="control-label">Choose a trip to view items:</label>
     <select class="form-control" asp-for="ListTypeId" asp-items="@Model.SelectListType">
@@ -12,11 +12,12 @@
     @Html.PartialAsync("_ItemList", @Model.TravelItem)
 </div>
 
+<a class="create" asp-action="Create">Add New Item</a>
+
 @section scripts {
 <script>
     $(function () {
         $('#ListTypeId').on('change', function(event) {
-            console.log('HALLO BABY!!!');
             event.preventDefault();
             event.stopPropagation();
 

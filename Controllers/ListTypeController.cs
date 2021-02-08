@@ -26,12 +26,7 @@ namespace TravelPacker.Controllers
         [HttpGet]
         public ActionResult Create()
         {
-            try { return View(); }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-                return StatusCode(500);
-            }
+            return View();
         }
 
         [HttpPost]
