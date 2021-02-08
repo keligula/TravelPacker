@@ -59,6 +59,7 @@ namespace TravelPacker.Controllers
             item.UserName = User.Identity.Name;
             item.ListTypeId = vm.ListTypeId;
             item.ItemTitle = vm.ItemTitle;
+            item.IsCompleted = false;
 
             if (ModelState.IsValid)
             {
@@ -76,6 +77,7 @@ namespace TravelPacker.Controllers
             model.UserId = item.UserId;
             model.UserName = item.UserName;
             model.Id = item.Id;
+            model.IsCompleted = item.IsCompleted;
             model.SelectListType = _listSvc.Read().Select(x => new SelectListItem
             {
                 Value = x.Id,
@@ -97,6 +99,7 @@ namespace TravelPacker.Controllers
             item.UserId = vm.UserId;
             item.UserName = vm.UserName;
             item.Id = vm.Id;
+            item.IsCompleted = vm.IsCompleted;
             if (ModelState.IsValid)
             {
                 if (User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value != item.UserId)

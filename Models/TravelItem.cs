@@ -18,6 +18,6 @@ namespace TravelPacker.Models
         public string UserId { get; set; }
         public string UserName { get; set; }
         public DateTime UpdatedDate { get; set; }
-        public SelectList ListTypes { get; set; }
+        public bool IsCompleted { get; set; }
     }
 }

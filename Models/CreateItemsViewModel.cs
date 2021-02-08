@@ -15,6 +15,7 @@ namespace TravelPacker.Models
         public string Title { get; set; }
         public string ListTypeId { get; set; }
         public DateTime UpdatedDate { get; set; }
+        public bool IsCompleted { get; set; }
         public IEnumerable<SelectListItem> SelectListType { get; set; }
     }
 }

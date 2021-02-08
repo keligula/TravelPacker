@@ -8,6 +8,7 @@
                 <th scope="col">ListTypeId</th>
                 <th scope="col">Date Last Updated</th>
                 <th scope="col">Created By</th>
+                <th scope="col">Completed?</th>
                 <th scope="col">Edit</th>
                 <th scope="col">Delete</th>
             </tr>
@@ -20,6 +21,7 @@
                         <td>@item.ListTypeId</td>
                         <td>@item.UpdatedDate</td>
                         <td>@item.UserName</td>
+                            <td><input type="checkbox" asp-for="@item.IsCompleted" /></td>
                         <td><a asp-action="Edit" asp-route-id="@item.Id">Edit</a></td>
                         <td><a asp-action="Delete" asp-route-id="@item.Id">Delete</a></td>
                     </tr>
